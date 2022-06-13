@@ -6,19 +6,28 @@
                     <div class="col-4">
                         <div class="age-container-chart">
                             <DoughnutChart
-                            chart-title="Возраст"/>
+                            chart-title="Возраст"
+                            :chart-labels="ages.chartLabels"
+                            :background-color="ages.backgroundColor"
+                            :datasets="ages.datasets"/>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="sex-container-chart">
                             <DoughnutChart
-                            chart-title="Пол"/>
+                            chart-title="Пол"
+                            :chart-labels="sex.chartLabels"
+                            :background-color="sex.backgroundColor"
+                            :datasets="sex.datasets"/>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="cash-container-chart">
                             <DoughnutChart
-                            chart-title="Уровень дохода"/>
+                            chart-title="Уровень дохода"
+                            :chart-labels="cash.chartLabels"
+                            :background-color="cash.backgroundColor"
+                            :datasets="cash.datasets"/>
                         </div>
                     </div>
                 </div>
@@ -75,22 +84,126 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
+                            <tr @click="collapse1 = !collapse1" aria-controls="collapsibleContent1">
+                                <th scope="row">Netflix</th>
+                                <td>https://vk.com/tvnetflix</td>
+                                <td>35000</td>
+                                <td>1000</td>
+                                <td>2500</td>
+                                <td>74%</td>
                             </tr>
                                 <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
+                                    <td colspan="6">
+                                        <MDBCollapse
+                                            id="collapsibleContent1"
+                                            v-model="collapse1"
+                                        >
+                                            <div class="collapsible-block">
+                                                <div class="collapsible-block-header">
+                                                    Статистика размещений
+                                                </div>
+                                                <div class="collapsible-block-middle">
+                                                    <div class="collapsible-block-middle__images">
+                                                        <img class="m-2" src="../assets/image1.png" alt="ural">
+                                                        <img class="m-2" src="../assets/image2.png" alt="ural">
+                                                        <img class="m-2" src="../assets/image3.png" alt="ural">
+                                                    </div>
+                                                    <div class="collapsible-block-middle__buttons">
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-primary w-75 mt-4 m-2 pr-2 fill-report-button"
+                                                            @click="apllyFilters()"
+                                                        >
+                                                            Заполнить отчет
+                                                        </button>
+                                                                        <button
+                                                            type="button"
+                                                            class="btn btn-success w-75 m-2 pr-2 download-report-button"
+                                                            @click="apllyFilters()"
+                                                        >
+                                                            Выгрузить отчет
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="collapsible-block-table">
+                                                    <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Публикация</th>
+                                                            <th scope="col">Расходы</th>
+                                                            <th scope="col">Клики</th>
+                                                            <th scope="col">Покупки</th>
+                                                            <th scope="col">CR</th>
+                                                            <th scope="col">CPO</th>
+                                                            <th scope="col">Доход</th>
+                                                            <th scope="col">ROMI</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1. От 13.12.21</td>
+                                                            <td>р.24 623</td>
+                                                            <td>2433</td>
+                                                            <td>50</td>
+                                                            <td>2,14%</td>
+                                                            <td>р.492,5</td>
+                                                            <td>р.56 588</td>
+                                                            <td>229,82%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2. От 15.01.22</td>
+                                                            <td>р.10 702</td>
+                                                            <td>431</td>
+                                                            <td>37</td>
+                                                            <td>8,58%</td>
+                                                            <td>р.289,2</td>
+                                                            <td>р.44 135</td>
+                                                            <td>229,82%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3. От 26.01.22</td>
+                                                            <td>р.10 285</td>
+                                                            <td>604</td>
+                                                            <td>21</td>
+                                                            <td>3,48%</td>
+                                                            <td>р.489,8</td>
+                                                            <td>р.36 571</td>
+                                                            <td>355,58%</td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td>Итого</td>
+                                                            <td>р.45 610</td>
+                                                            <td>3368</td>
+                                                            <td>108</td>
+                                                            <td>3,21%</td>
+                                                            <td>р.422,3</td>
+                                                            <td>р.137 294</td>
+                                                            <td>301,02%</td>
+                                                        </tr>
+                                                    </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </MDBCollapse>
+                                    </td>
+                                </tr>
+                            <tr>
+                                <th scope="row">Читающие</th>
+                                <td>https://vk.com/tvnetflix</td>
+                                <td>35000</td>
+                                <td>1000</td>
+                                <td>2500</td>
+                                <td>74%</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Импровизация</th>
+                                <td>https://vk.com/tvnetflix</td>
+                                <td>35000</td>
+                                <td>1000</td>
+                                <td>2500</td>
+                                <td>74%</td>
                             </tr>
                         </tbody>
                     </table>
@@ -104,44 +217,72 @@
 <script>
 import DoughnutChart from '@/components/doughnutChart.vue'
 // import { AgGridVue } from "ag-grid-vue3";
+import { MDBCollapse } from "mdb-vue-ui-kit"
+import { ref } from 'vue';
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 export default {
     name: 'RightBlock',
+    // props: {
+    //   collapse1: {
+    //     type: Boolean,
+    //     default: false
+    //   }
+    // },
     components: {
         DoughnutChart,
+        MDBCollapse
         // AgGridVue
     },
-    setup() {
+    methods: {
+
+    },
+    mounted() {
+        console.log('in right component',this.$store.state.values);
+        // this.$root.$on('getResponse', function (values) {
+        //     console.log(values);
+        // })
+    },
+    computed : {
+        age() {
+            console.log('111', this.$store.state.response);
+            return 11
+        }
+    },
+    data() {
         return {
-        columnDefs: [
-            { headerName: " ", field: "name" },
-            { headerName: "URL", field: "url" },
-            { headerName: "Подписчики", field: "subscribers" },
-            { headerName: "Лайки", field: "likes" },
-            { headerName: "Репосты", field: "reposts" },
-            { headerName: "Комментарии", field: "comments" },
-            { headerName: "Стоимость", field: "cost" },
-            { headerName: "Соответствие", field: "define" },
-        ],
-        rowData: [
-            { name: "Netflix", url: "https://vk.com/tvnetflix", subscribers: 35000, likes: 3500, reposts: 3500, comments:100, cost: 10000, define: "54%"},
-            { name: "Читающие", url: "https://vk.com/tvnetflix", subscribers: 35000, likes: 3500, reposts: 3500, comments:100, cost: 10000, define: "54%"},
-            { name: "Импровизация", url: "https://vk.com/tvnetflix", subscribers: 35000, likes: 3500, reposts: 3500, comments:100, cost: 10000, define: "54%"},
-            { name: "Toyota club", url: "https://vk.com/tvnetflix", subscribers: 35000, likes: 3500, reposts: 3500, comments:100, cost: 10000, define: "54%"},
-            { name: "Группа по интересам", url: "https://vk.com/tvnetflix", subscribers: 35000, likes: 3500, reposts: 3500, comments:100, cost: 10000, define: "54%"},
-        ],
+
+            ages:{
+                chartLabels: ['до 18', '18-24', '25-34', '35-44', '45-54', '55-100'],
+                backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16', '#2D00F9', '#006426'],
+                datasets: ['1640', '25218', '56869', '75790', '61377', '84988']
+            },
+            sex:{
+                chartLabels: ['мужской', 'женский'],
+                backgroundColor: ['#41B883', '#E46651'],
+                datasets: ['171915', '199668']
+            },
+            cash:{
+                chartLabels: ['0-20', '21-50', '51-100', '101-200'],
+                backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+                datasets: ['1640', '25218', '56869', '75790']
+            }
+
+        }
+    },
+    setup() {
+        const collapse1 = ref(false);
+
+        return {
+            collapse1,
         };
     },
 }
 </script>
 
 <style scoped>
-/* .right-block__top {
-
-} */
 .right-block__bottom {
     padding: 10px 0 10px 0;
 }
@@ -161,7 +302,6 @@ export default {
     align-items: center;
     justify-content: flex-start;
     height: 40px;
-    /* border: 1px solid red; */
 }
 .group-container-header__text {
     padding-left: 15px;
@@ -190,28 +330,16 @@ export default {
     margin-top: 10px;
     height: calc(100%-80px);
 }
+.collapsible-block-middle {
+    display: flex;
+}
+.collapsible-block-middle__images {
+    display: flex;
+    padding: 5px;
+}
+.collapsible-block-middle__images {
+    display: flex;
+    padding: 5px;
 
+}
 </style>
-
-
-                    <!-- <div class="row groups-container-info-headers">
-                        <div class="col"></div>
-                        <div class="col">URL</div>
-                        <div class="col">Подписчики</div>
-                        <div class="col">Лайки</div>
-                        <div class="col">Репосты</div>
-                        <div class="col">Комментарии</div>
-                        <div class="col">Стоимость</div>
-                        <div class="col">Соответствие</div>
-                    </div>
-                    <hr>
-                    <div class="row groups-container-info-content">
-                        <div class="col">Netflix</div>
-                        <div class="col">https://vk.com/tvnetflix</div>
-                        <div class="col">Подписчики</div>
-                        <div class="col">Лайки</div>
-                        <div class="col">Репосты</div>
-                        <div class="col">Комментарии</div>
-                        <div class="col">Стоимость</div>
-                        <div class="col">Соответствие</div>
-                    </div> -->

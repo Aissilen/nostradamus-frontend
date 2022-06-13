@@ -23,6 +23,9 @@ export default {
   components: { Doughnut },
   props: {
     chartTitle: String,
+    chartLabels: Array,
+    backgroundColor: Array,
+    datasets: Array,
     chartId: {
       type: String,
       default: 'doughnut-chart'
@@ -55,11 +58,11 @@ export default {
   data() {
     return {
       chartData: {
-        labels: ['40-55 лет', '30-40 лет', '18-30 лет', '14-18 лет'],
+        labels: this.chartLabels,
         datasets: [
             {
-                backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-                data: [40, 20, 80, 10]
+              backgroundColor: this.backgroundColor,
+              data: this.datasets
             }
         ]
       },
@@ -77,10 +80,6 @@ export default {
         }
       }
     }
-  },
-  created() {
-    // ❌ warning, props are readonly!
-    console.log(this.chartTitle);
   }
 }
 </script>

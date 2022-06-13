@@ -50,7 +50,7 @@
                     class="btn btn-success w-100 start-search-button"
                     @click="apllyFilters()"
                 >
-                    НАЧАТЬ
+                    Найти
                 </button>
             </div>
         </div>
@@ -59,6 +59,7 @@
 
 <script>
 import Multiselect from '@vueform/multiselect'
+import axios from 'axios';
 
 export default {
   name: 'LeftBlock',
@@ -67,8 +68,52 @@ export default {
   },
   methods: {
     apllyFilters () {
-        console.log(this.values);
+        this.$store.state.values = this.values
+        console.log(JSON.stringify(this.values));
+
+        axios.post(`http://10.0.36.11:1111/nostradamus/`,
+        JSON.stringify(this.values),
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            auth: {
+                username: 'lobanov',
+                password: 'ivan'
+            }
+        })
+        .then(response => {
+            // this.$store.state.response = response.data
+            console.log(response.data);
+            for (var prop in response.data){
+                for (var key in response.data[prop]){
+                    console.log(key);
+                }
+            }
+            console.log('request complete');
+            this.$root.$emit('getResponse')
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
     }
+  },
+  computed: {
+    //   isDisabled () {
+    //     //   this.values.forEach(el=>{
+    //     //       console.log(el);
+    //     //   })
+    //     var count = 0
+    //     for (var prop in this.values) {
+    //         console.log(this.values[prop])
+    //         if (this.values[prop] == null){
+    //             count = count + 1
+    //         }
+    //     }
+    //     var result = Object.keys(this.values).length == count ? false : true
+
+    //     return result
+    //   }
   },
   data() {
     return {
@@ -80,16 +125,16 @@ export default {
       },
       options: {
         sex: [
-          'Мужской',
-          'Женский',
+          'м',
+          'ж',
         ],
         age: [
-          'до 18',
+          '0-18',
           '18-24',
           '25-34',
           '35-44',
           '45-54',
-          ' 55+ ',
+          '55-100',
         ],
         interest: [
           'Финансы и инвестиции',
@@ -97,11 +142,10 @@ export default {
           'Автолюбители',
         ],
         cash: [
-          '0-20k',
-          '21-50k',
-          '51-100k',
-          '101-200k',
-          '200k+'
+          '0-20',
+          '21-50',
+          '51-100',
+          '101-200',
         ]
       }
     }
